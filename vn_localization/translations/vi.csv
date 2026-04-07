@@ -1,0 +1,121 @@
+Customer,Khách hàng
+Customers,Danh sách khách hàng
+Customer Name,Tên khách hàng
+Customer Group,Nhóm khách hàng
+Territory,Khu vực
+Contact,Liên hệ
+Address,Địa chỉ
+
+Supplier,Nhà cung cấp
+Suppliers,Danh sách nhà cung cấp
+Supplier Name,Tên nhà cung cấp
+Supplier Group,Nhóm nhà cung cấp
+
+Item,Hàng hóa
+Items,Danh sách hàng hóa
+Item Code,Mã hàng
+Item Name,Tên hàng
+Item Group,Nhóm hàng
+Stock UOM,Đơn vị tính
+UOM,Đơn vị
+Description,Mô tả
+
+Warehouse,Kho
+Warehouses,Danh sách kho
+Stock,Tồn kho
+Stock Balance,Tồn kho hiện tại
+Stock Ledger,Sổ kho
+
+Sales Invoice,Hóa đơn bán hàng
+Sales Invoices,Danh sách hóa đơn bán
+Posting Date,Ngày hạch toán
+Due Date,Hạn thanh toán
+Customer Name,Tên khách hàng
+Grand Total,Tổng tiền
+Outstanding Amount,Công nợ còn lại
+Paid Amount,Đã thanh toán
+Status,Trạng thái
+
+Sales Order,Đơn bán hàng
+Delivery Note,Phiếu giao hàng
+
+Purchase Invoice,Hóa đơn mua hàng
+Purchase Invoices,Danh sách hóa đơn mua
+Supplier Name,Tên nhà cung cấp
+Bill No,Số hóa đơn
+Bill Date,Ngày hóa đơn
+
+Purchase Order,Đơn mua hàng
+Purchase Receipt,Phiếu nhập kho
+
+Payment Entry,Phiếu thu chi
+Payment Entries,Danh sách phiếu thu chi
+Payment Type,Loại thanh toán
+Mode of Payment,Hình thức thanh toán
+Paid To,Tài khoản nhận
+Paid From,Tài khoản chi
+Received Amount,Số tiền nhận
+Paid Amount,Số tiền chi
+
+Account,Tài khoản
+Accounts,Tài khoản kế toán
+Chart of Accounts,Sơ đồ tài khoản
+
+Accounts Receivable,Công nợ phải thu
+Accounts Payable,Công nợ phải trả
+
+Debit,Nợ
+Credit,Có
+Balance,Số dư
+
+Company,Công ty
+Currency,Tiền tệ
+Cost Center,Trung tâm chi phí
+
+Stock Entry,Phiếu nhập xuất kho
+Stock Entries,Danh sách phiếu kho
+Material Receipt,Nhập kho
+Material Issue,Xuất kho
+Material Transfer,Chuyển kho
+
+Qty,Số lượng
+Rate,Đơn giá
+Amount,Thành tiền
+
+Total,Tổng cộng
+Net Total,Tổng trước thuế
+Grand Total,Tổng thanh toán
+
+Cash,Tiền mặt
+Bank,Ngân hàng
+
+Journal Entry,Bút toán
+Journal Entries,Danh sách bút toán
+
+Profit and Loss,Lợi nhuận và lỗ
+Balance Sheet,Bảng cân đối kế toán
+Cash Flow,Dòng tiền
+
+Reports,Báo cáo
+Dashboard,Tổng quan
+
+Selling,Bán hàng
+Buying,Mua hàng
+Stock,Tồn kho
+Accounts,Kế toán
+
+Create,Tạo mới
+Save,Lưu
+Submit,Xác nhận
+Cancel,Hủy
+Update,Cập nhật
+Delete,Xóa
+Edit,Chỉnh sửa
+View,Xem
+
+From Date,Từ ngày
+To Date,Đến ngày
+Posting Time,Giờ hạch toán
+
+Remarks,Ghi chú
+Notes,Ghi chú
