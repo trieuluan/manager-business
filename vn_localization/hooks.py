@@ -86,7 +86,7 @@ app_license = "mit"
 # ------------
 
 # before_install = "vn_localization.install.before_install"
-# after_install = "vn_localization.install.after_install"
+after_install = "vn_localization.setup.install.after_install"
 
 # Uninstallation
 # ------------
@@ -202,6 +202,10 @@ app_license = "mit"
 # before_request = ["vn_localization.utils.before_request"]
 # after_request = ["vn_localization.utils.after_request"]
 
+# Migrate Hooks
+# -------------
+after_migrate = ["vn_localization.setup.migrate.after_migrate"]
+
 # Job Events
 # ----------
 # before_job = ["vn_localization.utils.before_job"]
@@ -254,5 +258,41 @@ fixtures = [
     {
         "dt": "Language",
         "filters": [["name", "in", ["vi"]]]
+    },
+    {
+        "dt": "Custom Field",
+        "filters": [["module", "=", "Vn Localization"]]
+    },
+    {
+        "dt": "Property Setter",
+        "filters": [["module", "=", "Vn Localization"]]
+    },
+    {
+        "dt": "Workspace",
+        "filters": [["module", "=", "Vn Localization"]]
+    },
+    {
+        "dt": "Workflow",
+        "filters": [["workflow_name", "like", "VN %"]]
+    },
+    {
+        "dt": "Workflow State",
+        "filters": [["name", "in", ["Nháp", "Chờ duyệt", "Đã duyệt", "Đã hủy"]]]
+    },
+    {
+        "dt": "Workflow Action Master",
+        "filters": [["name", "in", ["Gửi duyệt", "Duyệt", "Từ chối", "Hủy"]]]
+    },
+    {
+        "dt": "Print Format",
+        "filters": [["module", "=", "Vn Localization"]]
+    },
+    {
+        "dt": "Report",
+        "filters": [["module", "=", "Vn Localization"]]
+    },
+    {
+        "dt": "Client Script",
+        "filters": [["module", "=", "Vn Localization"]]
     }
 ]

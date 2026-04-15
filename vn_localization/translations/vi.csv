@@ -25,6 +25,7 @@ Warehouses,Danh sách kho
 Stock,Tồn kho
 Stock Balance,Tồn kho hiện tại
 Stock Ledger,Sổ kho
+Stock Reconciliation,Kiểm kê kho
 
 Sales Invoice,Hóa đơn bán hàng
 Sales Invoices,Danh sách hóa đơn bán
@@ -38,6 +39,12 @@ Status,Trạng thái
 
 Sales Order,Đơn bán hàng
 Delivery Note,Phiếu giao hàng
+Quotation,Báo giá
+Sales Register,Sổ bán hàng
+Sales Return,Trả hàng bán
+Credit Note,Giảm giá bán
+Return / Credit Note,Trả hàng / Giảm giá bán
+Issue Credit Note,Lập giảm giá bán
 
 Purchase Invoice,Hóa đơn mua hàng
 Purchase Invoices,Danh sách hóa đơn mua
@@ -47,6 +54,9 @@ Bill Date,Ngày hóa đơn
 
 Purchase Order,Đơn mua hàng
 Purchase Receipt,Phiếu nhập kho
+Purchase Return,Trả hàng mua
+Debit Note,Giảm giá mua
+Return / Debit Note,Trả hàng / Giảm giá mua
 
 Payment Entry,Phiếu thu chi
 Payment Entries,Danh sách phiếu thu chi
@@ -63,6 +73,8 @@ Chart of Accounts,Sơ đồ tài khoản
 
 Accounts Receivable,Công nợ phải thu
 Accounts Payable,Công nợ phải trả
+General Ledger,Sổ cái
+Financial Reports,Báo cáo tài chính
 
 Debit,Nợ
 Credit,Có
@@ -98,11 +110,15 @@ Cash Flow,Dòng tiền
 
 Reports,Báo cáo
 Dashboard,Tổng quan
+Workspace,Không gian làm việc
+Invoicing,Hóa đơn
 
 Selling,Bán hàng
 Buying,Mua hàng
 Stock,Tồn kho
 Accounts,Kế toán
+Build,Xây dựng
+Website,Website
 
 Create,Tạo mới
 Save,Lưu
@@ -119,3 +135,12 @@ Posting Time,Giờ hạch toán
 
 Remarks,Ghi chú
 Notes,Ghi chú
+Tax ID,Mã số thuế (MST)
+Invoice Company Name,Tên đơn vị xuất hóa đơn
+Invoice Address,Địa chỉ xuất hóa đơn
+Invoice Email,Email nhận hóa đơn
+Buyer Name,Người mua hàng
+Show Return Entries,Hiển thị các chứng từ trả hàng
+Update Outstanding for Self,Cập nhật số dư còn lại cho chính chứng từ
+Price List,Bảng giá
+Material Request,Yêu cầu mua

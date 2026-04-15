@@ -1,0 +1,38 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": null,
+  "modified": "2026-04-15 15:19:49.670548",
+  "name": "Nháp",
+  "style": "Primary",
+  "workflow_state_name": "Nháp"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": null,
+  "modified": "2026-04-15 15:19:49.674256",
+  "name": "Chờ duyệt",
+  "style": "Warning",
+  "workflow_state_name": "Chờ duyệt"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": null,
+  "modified": "2026-04-15 15:19:49.675554",
+  "name": "Đã duyệt",
+  "style": "Success",
+  "workflow_state_name": "Đã duyệt"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": null,
+  "modified": "2026-04-15 15:19:49.676221",
+  "name": "Đã hủy",
+  "style": "Danger",
+  "workflow_state_name": "Đã hủy"
+ }
+]
