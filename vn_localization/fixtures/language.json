@@ -1,0 +1,17 @@
+[
+ {
+  "based_on": "vi",
+  "date_format": "dd/mm/yyyy",
+  "docstatus": 0,
+  "doctype": "Language",
+  "enabled": 1,
+  "first_day_of_the_week": "Monday",
+  "flag": null,
+  "language_code": "vi",
+  "language_name": "Tiếng Việt",
+  "modified": "2026-04-07 22:35:58.447278",
+  "name": "vi",
+  "number_format": "#,###.##",
+  "time_format": "HH:mm:ss"
+ }
+]
