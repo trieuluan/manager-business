@@ -1,0 +1,21 @@
+{
+ "cards": [],
+ "charts": [
+  {
+   "chart": "Sales Order Analysis",
+   "width": "Half"
+  }
+ ],
+ "creation": "2026-04-15 20:15:59.197063",
+ "dashboard_name": "Home VN",
+ "docstatus": 0,
+ "doctype": "Dashboard",
+ "idx": 0,
+ "is_default": 0,
+ "is_standard": 1,
+ "modified": "2026-04-15 20:16:42.920982",
+ "modified_by": "Administrator",
+ "module": "Vn Localization",
+ "name": "Home VN",
+ "owner": "Administrator"
+}

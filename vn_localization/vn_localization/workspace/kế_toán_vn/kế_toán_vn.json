@@ -1,8 +1,8 @@
 {
  "app": "vn_localization",
  "charts": [],
- "content": "[]",
- "creation": "2026-04-15 15:57:37.505032",
+ "content": "[{\"id\":\"yPemHKAu8D\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Welcome to the K\u1ebf to\u00e1n VN workspace</span>\",\"col\":12}},{\"id\":\"FObIZPY0wB\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"H\u00f3a \u0111\u01a1n b\u00e1n h\u00e0ng\",\"col\":3}},{\"id\":\"kCeEVoiu5d\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"H\u00f3a \u0111\u01a1n mua h\u00e0ng\",\"col\":3}},{\"id\":\"ZpgV-N46J7\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Phi\u1ebfu thu chi\",\"col\":3}},{\"id\":\"wDg5VRLJ0o\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"B\u00fat to\u00e1n\",\"col\":3}}]",
+ "creation": "2026-04-15 16:26:54.806536",
  "custom_blocks": [],
  "docstatus": 0,
  "doctype": "Workspace",
@@ -14,15 +14,6 @@
  "label": "K\u1ebf to\u00e1n VN",
  "link_type": "DocType",
  "links": [
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "B\u00e1o c\u00e1o t\u00e0i ch\u00ednh",
-   "link_count": 0,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
-  },
   {
    "hidden": 0,
    "is_query_report": 0,
@@ -67,40 +58,47 @@
    "type": "Link"
   }
  ],
- "modified": "2026-04-15 15:59:03.764673",
+ "modified": "2026-04-15 17:20:57.443506",
  "modified_by": "Administrator",
  "module": "Vn Localization",
  "name": "K\u1ebf to\u00e1n VN",
  "number_cards": [],
  "owner": "Administrator",
- "parent_page": "Home",
  "public": 1,
  "quick_lists": [],
  "roles": [],
  "sequence_id": 70.0,
  "shortcuts": [
   {
+   "color": "Grey",
    "doc_view": "List",
    "label": "H\u00f3a \u0111\u01a1n b\u00e1n h\u00e0ng",
    "link_to": "Sales Invoice",
+   "stats_filter": "[]",
    "type": "DocType"
   },
   {
+   "color": "Grey",
    "doc_view": "List",
    "label": "H\u00f3a \u0111\u01a1n mua h\u00e0ng",
    "link_to": "Purchase Invoice",
+   "stats_filter": "[]",
    "type": "DocType"
   },
   {
+   "color": "Grey",
    "doc_view": "List",
    "label": "Phi\u1ebfu thu chi",
    "link_to": "Payment Entry",
+   "stats_filter": "[]",
    "type": "DocType"
   },
   {
+   "color": "Grey",
    "doc_view": "List",
    "label": "B\u00fat to\u00e1n",
    "link_to": "Journal Entry",
+   "stats_filter": "[]",
    "type": "DocType"
   }
  ],
