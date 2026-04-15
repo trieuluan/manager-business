@@ -7,16 +7,23 @@ from vn_localization.setup.constants import APP_MODULE, VN_PRINT_FORMATS
 
 def sync_vn_print_defaults():
     for config in VN_PRINT_FORMATS:
+        doc_type = config.get("doc_type")
+        if doc_type and not frappe.db.exists("DocType", doc_type):
+            continue
         _upsert_print_format(config)
 
 
 def _upsert_print_format(config):
+    doc_type = config.get("doc_type")
+    if doc_type and not frappe.db.exists("DocType", doc_type):
+        return None
+    
     existing_name = frappe.db.exists("Print Format", config["name"])
     values = {
         "doctype": "Print Format",
         "name": config["name"],
         "module": APP_MODULE,
-        "doc_type": config["doc_type"],
+        "doc_type": doc_type,
         "print_format_type": "Jinja",
         "print_format_for": "DocType",
         "custom_format": 1,
