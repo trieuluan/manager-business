@@ -6,31 +6,20 @@
    "label": "Trends"
   }
  ],
- "content": "[{\"id\":\"exCWAm6Y4_\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Welcome to the Trang ch\u1ee7 VN workspace</span>\",\"col\":12}},{\"id\":\"u3aC-1RpKK\",\"type\":\"paragraph\",\"data\":{\"text\":\"Click on \\n\\t\\t\\t\\n\\t\\t\\t\\n\\t\\t to edit\",\"col\":12}},{\"id\":\"4f8sZqmTvU\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Doanh thu h\u00f4m nay\",\"col\":4}},{\"id\":\"27b-yVtzWd\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sales\",\"col\":3}},{\"id\":\"rFVuzZYb0C\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Trends\",\"col\":12}}]",
+ "content": "[{\"id\":\"4f8sZqmTvU\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Doanh thu h\u00f4m nay\",\"col\":4}},{\"id\":\"27b-yVtzWd\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sales\",\"col\":3}},{\"id\":\"KQXPgSHJJ6\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Ph\u00e2n t\u00edch \u0111\u01a1n \u0111\u1eb7t h\u00e0ng\",\"col\":3}},{\"id\":\"rFVuzZYb0C\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Trends\",\"col\":12}},{\"id\":\"gvzdgytBmk\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"M\u1eb7t h\u00e0ng\",\"col\":3}}]",
  "creation": "2026-04-15 20:11:10.833758",
  "custom_blocks": [],
  "docstatus": 0,
  "doctype": "Workspace",
  "hide_custom": 0,
  "icon": "home",
- "idx": 0,
+ "idx": 7,
  "indicator_color": "green",
  "is_hidden": 0,
  "label": "Trang ch\u1ee7 VN",
  "link_type": "DocType",
- "links": [
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "B\u00e1n h\u00e0ng",
-   "link_count": 0,
-   "link_to": "About Us Settings",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  }
- ],
- "modified": "2026-04-15 20:26:34.346898",
+ "links": [],
+ "modified": "2026-04-16 02:01:28.953385",
  "modified_by": "Administrator",
  "module": "Vn Localization",
  "name": "Trang ch\u1ee7 VN",
@@ -49,8 +38,24 @@
   {
    "color": "Grey",
    "doc_view": "List",
+   "label": "Ph\u00e2n t\u00edch \u0111\u01a1n \u0111\u1eb7t h\u00e0ng",
+   "link_to": "Purchase Order Analysis",
+   "report_ref_doctype": "Purchase Order",
+   "type": "Report"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
    "label": "Sales",
    "link_to": "Sales Invoice",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "M\u1eb7t h\u00e0ng",
+   "link_to": "Item",
    "stats_filter": "[]",
    "type": "DocType"
   }
