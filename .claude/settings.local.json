@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__codemap-mcp-dev__get_project_map",
+      "mcp__codemap-mcp-dev__get_project_insights"
+    ]
+  }
+}
