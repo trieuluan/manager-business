@@ -16,9 +16,9 @@ DEFAULT_OLLAMA_TEMPERATURE = 0.2
 DEFAULT_PROVIDER_ORDER = ["openrouter", "groq", "openai", "ollama"]
 
 DEFAULT_OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
-DEFAULT_OPENROUTER_MODEL = "google/gemma-3-4b-it:free"
+DEFAULT_OPENROUTER_MODEL = "meta-llama/llama-3.3-70b-instruct:free"
 DEFAULT_GROQ_BASE_URL = "https://api.groq.com/openai/v1"
-DEFAULT_GROQ_MODEL = "llama-3.1-8b-instant"
+DEFAULT_GROQ_MODEL = "llama-3.3-70b-versatile"
 DEFAULT_OPENAI_BASE_URL = "https://api.openai.com/v1"
 DEFAULT_OPENAI_MODEL = "gpt-4o-mini"
 DEFAULT_EXTERNAL_AI_TIMEOUT = 60

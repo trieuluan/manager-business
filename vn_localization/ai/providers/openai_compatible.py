@@ -108,6 +108,7 @@ class OpenAICompatibleProvider:
 		headers = {
 			"Authorization": f"Bearer {self.api_key}",
 			"Content-Type": "application/json",
+			"User-Agent": "Mozilla/5.0",
 			**self.extra_headers,
 		}
 		return Request(
