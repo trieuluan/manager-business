@@ -6,12 +6,7 @@ import json
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
-import frappe
-
-
-DEFAULT_MODEL = "qwen2.5:1.5b"
-DEFAULT_BASE_URL = "http://ollama:11434"
-DEFAULT_TIMEOUT = 60
+from vn_localization.ai.settings import get_ai_settings
 
 
 class OllamaError(Exception):
@@ -19,10 +14,11 @@ class OllamaError(Exception):
 
 
 def get_ollama_settings():
+	settings = get_ai_settings()
 	return {
-		"base_url": frappe.conf.get("ollama_base_url") or DEFAULT_BASE_URL,
-		"model": frappe.conf.get("ollama_model") or DEFAULT_MODEL,
-		"timeout": int(frappe.conf.get("ollama_timeout") or DEFAULT_TIMEOUT),
+		"base_url": settings["ollama_base_url"],
+		"model": settings["ollama_model"],
+		"timeout": settings["ollama_timeout"],
 	}
 
 
@@ -67,3 +63,52 @@ def chat(messages, model=None, options=None):
 		"done": data.get("done"),
 	}
 
+
+def stream_chat(messages, model=None, options=None):
+	settings = get_ollama_settings()
+	payload = {
+		"model": model or settings["model"],
+		"messages": messages,
+		"stream": True,
+	}
+	if options:
+		payload["options"] = options
+
+	body = json.dumps(payload).encode("utf-8")
+	request = Request(
+		f"{settings['base_url'].rstrip('/')}/api/chat",
+		data=body,
+		headers={"Content-Type": "application/json"},
+		method="POST",
+	)
+
+	try:
+		with urlopen(request, timeout=settings["timeout"]) as response:
+			for line in response:
+				if not line:
+					continue
+				try:
+					data = json.loads(line.decode("utf-8"))
+				except json.JSONDecodeError as exc:
+					raise OllamaError("Ollama returned an invalid stream chunk") from exc
+
+				message = data.get("message") or {}
+				content = message.get("content")
+				if content:
+					yield {
+						"type": "token",
+						"content": content,
+						"model": data.get("model") or payload["model"],
+					}
+				if data.get("done"):
+					yield {
+						"type": "done",
+						"model": data.get("model") or payload["model"],
+					}
+					return
+	except HTTPError as exc:
+		raise OllamaError(f"Ollama returned HTTP {exc.code}") from exc
+	except URLError as exc:
+		raise OllamaError("Cannot connect to the local Ollama service") from exc
+	except TimeoutError as exc:
+		raise OllamaError("Ollama request timed out") from exc

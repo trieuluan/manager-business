@@ -5,8 +5,12 @@
 	window.vnLocalizationAiChatLoaded = true;
 
 	const METHOD = "vn_localization.ai.chat.send_message";
+	const STREAM_METHOD = "vn_localization.ai.chat.stream_message";
 	const STORAGE_KEY = "vn_localization_ai_chat_history";
 	const MAX_HISTORY_ITEMS = 12;
+	const WIDGET_VERSION = "20260428-current-doc";
+
+	console.info("VN AI chat widget loaded", WIDGET_VERSION);
 
 	function boot() {
 		if (!window.frappe || !frappe.session || frappe.session.user === "Guest") {
@@ -16,29 +20,9 @@
 			return;
 		}
 
-		injectStyles();
-
 		const root = document.createElement("div");
 		root.id = "vn-ai-chat-root";
-		root.innerHTML = `
-			<button class="vn-ai-chat-toggle" type="button" aria-label="Mở trợ lý AI" title="Trợ lý AI">
-				<span>AI</span>
-			</button>
-			<section class="vn-ai-chat-panel" aria-label="Trợ lý AI" hidden>
-				<header class="vn-ai-chat-header">
-					<div>
-						<strong>Trợ lý AI</strong>
-						<span>Hướng dẫn ERPNext</span>
-					</div>
-					<button class="vn-ai-chat-close" type="button" aria-label="Đóng">×</button>
-				</header>
-				<div class="vn-ai-chat-messages"></div>
-				<form class="vn-ai-chat-form">
-					<textarea class="vn-ai-chat-input" rows="2" placeholder="Hỏi cách dùng ERPNext..." maxlength="2000"></textarea>
-					<button class="vn-ai-chat-send" type="submit">Gửi</button>
-				</form>
-			</section>
-		`;
+		root.innerHTML = getWidgetTemplate();
 		document.body.appendChild(root);
 
 		const toggle = root.querySelector(".vn-ai-chat-toggle");
@@ -90,41 +74,214 @@
 
 	function sendMessage({ content, history, messagesEl, sendButton, input }) {
 		history.push({ role: "user", content });
-		renderMessages(messagesEl, history, true);
+		renderMessages(messagesEl, history);
 		setLoading(sendButton, true);
 
 		const apiHistory = history
 			.filter((item) => item.role === "user" || item.role === "assistant")
 			.slice(-8);
+		const pageContext = getPageContext();
 
-		frappe.call({
-			method: METHOD,
-			args: {
-				message: content,
-				history: JSON.stringify(apiHistory),
-			},
-			callback(response) {
-				const data = response.message || {};
-				history.push({
-					role: "assistant",
-					content: data.message || "Mình chưa nhận được phản hồi phù hợp.",
+		if (window.fetch && window.ReadableStream) {
+			streamMessage({ content, history, apiHistory, messagesEl, pageContext })
+				.catch(function (error) {
+					console.warn("VN AI chat stream failed, falling back to RPC.", error);
+					return sendMessageFallback({ content, history, apiHistory, messagesEl, pageContext });
+				})
+				.finally(function () {
+					setLoading(sendButton, false);
+					input.focus();
 				});
-				trimHistory(history);
-				saveHistory(history);
-				renderMessages(messagesEl, history);
-			},
-			error() {
-				history.push({
-					role: "assistant",
-					content: "Mình chưa kết nối được AI local. Bạn kiểm tra Ollama và model đang chạy nhé.",
-				});
-				renderMessages(messagesEl, history);
-			},
-			always() {
-				setLoading(sendButton, false);
-				input.focus();
+			return;
+		}
+
+		sendMessageFallback({ content, history, apiHistory, messagesEl, pageContext }).finally(function () {
+			setLoading(sendButton, false);
+			input.focus();
+		});
+	}
+
+	async function streamMessage({ content, history, apiHistory, messagesEl, pageContext }) {
+		const assistantMessage = createWaitingMessage();
+		messagesEl.appendChild(assistantMessage);
+		scrollToBottom(messagesEl);
+
+		const formData = new URLSearchParams();
+		formData.set("message", content);
+		formData.set("history", JSON.stringify(apiHistory));
+		appendPageContext(formData, pageContext);
+
+		const response = await fetch(`/api/method/${STREAM_METHOD}`, {
+			method: "POST",
+			body: formData.toString(),
+			credentials: "same-origin",
+			headers: {
+				"Accept": "text/event-stream",
+				"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+				"X-Frappe-CSRF-Token": frappe.csrf_token || "",
 			},
 		});
+
+		if (!response.ok || !response.body) {
+			throw new Error("Streaming response is unavailable");
+		}
+
+		const reader = response.body.getReader();
+		const decoder = new TextDecoder();
+		let buffer = "";
+		let assistantContent = "";
+
+		while (true) {
+			const { value, done } = await reader.read();
+			if (done) {
+				break;
+			}
+
+			buffer += decoder.decode(value, { stream: true });
+			const parts = buffer.split("\n\n");
+			buffer = parts.pop() || "";
+
+			for (const part of parts) {
+				const event = parseSseEvent(part);
+				if (!event) {
+					continue;
+				}
+
+				if (event.event === "token" && event.data.content) {
+					assistantContent += event.data.content;
+					updateStreamingMessage(assistantMessage, assistantContent);
+				}
+
+				if (event.event === "error") {
+					throw new Error(event.data.message || "AI stream failed");
+				}
+			}
+		}
+
+		if (!assistantContent.trim()) {
+			throw new Error("AI stream returned no content");
+		}
+
+		history.push({ role: "assistant", content: assistantContent.trim() });
+		trimHistory(history);
+		saveHistory(history);
+		renderMessages(messagesEl, history);
+	}
+
+	function sendMessageFallback({ content, history, apiHistory, messagesEl, pageContext }) {
+		renderMessages(messagesEl, history, true);
+
+		return new Promise(function (resolve) {
+			const args = {
+				message: content,
+				history: JSON.stringify(apiHistory),
+			};
+			Object.assign(args, pageContext);
+
+			frappe.call({
+				method: METHOD,
+				args,
+				callback(response) {
+					const data = response.message || {};
+					history.push({
+						role: "assistant",
+						content: data.message || "Mình chưa nhận được phản hồi phù hợp.",
+					});
+					trimHistory(history);
+					saveHistory(history);
+					renderMessages(messagesEl, history);
+				},
+				error() {
+					history.push({
+						role: "assistant",
+						content: "Mình chưa kết nối được AI local. Bạn kiểm tra Ollama và model đang chạy nhé.",
+					});
+					renderMessages(messagesEl, history);
+				},
+				always() {
+					resolve();
+				},
+			});
+		});
+	}
+
+	function getPageContext() {
+		const route = frappe.get_route ? frappe.get_route() : [];
+		const form = window.cur_frm;
+		const context = {
+			route: JSON.stringify(route || []),
+		};
+
+		if (form && form.doctype && form.docname && !form.is_new()) {
+			context.doctype = form.doctype;
+			context.docname = form.docname;
+		}
+
+		return context;
+	}
+
+	function appendPageContext(formData, pageContext) {
+		Object.keys(pageContext || {}).forEach(function (key) {
+			if (pageContext[key]) {
+				formData.set(key, pageContext[key]);
+			}
+		});
+	}
+
+	function parseSseEvent(rawEvent) {
+		const lines = rawEvent.split("\n");
+		let eventName = "message";
+		let data = "";
+
+		lines.forEach(function (line) {
+			if (line.startsWith("event:")) {
+				eventName = line.slice(6).trim();
+			}
+			if (line.startsWith("data:")) {
+				data += line.slice(5).trim();
+			}
+		});
+
+		if (!data) {
+			return null;
+		}
+
+		try {
+			return {
+				event: eventName,
+				data: JSON.parse(data),
+			};
+		} catch (error) {
+			return null;
+		}
+	}
+
+	function getWidgetTemplate() {
+		return `
+			<button class="vn-ai-chat-toggle" type="button" aria-label="Mở trợ lý AI" title="Trợ lý AI">
+				<span>AI</span>
+			</button>
+			<section class="vn-ai-chat-panel" aria-label="Trợ lý AI" hidden>
+				<header class="vn-ai-chat-header">
+					<div>
+						<strong>Trợ lý AI</strong>
+						<span>Hướng dẫn ERPNext</span>
+					</div>
+					<button class="vn-ai-chat-close" type="button" aria-label="Đóng">×</button>
+				</header>
+				<div class="vn-ai-chat-messages"></div>
+				<form class="vn-ai-chat-form">
+					<textarea class="vn-ai-chat-input" rows="2" placeholder="Hỏi cách dùng ERPNext..." maxlength="2000"></textarea>
+					<button class="vn-ai-chat-send" type="submit">Gửi</button>
+				</form>
+			</section>
+		`;
+	}
+
+	function updateStreamingMessage(message, content) {
+		message.classList.remove("vn-ai-message-loading");
+		message.textContent = content;
+		scrollToBottom(message.parentElement);
 	}
 
 	function renderMessages(container, history, isWaiting) {
@@ -187,194 +344,6 @@
 		requestAnimationFrame(function () {
 			container.scrollTop = container.scrollHeight;
 		});
-	}
-
-	function injectStyles() {
-		if (document.getElementById("vn-ai-chat-styles")) {
-			return;
-		}
-
-		const style = document.createElement("style");
-		style.id = "vn-ai-chat-styles";
-		style.textContent = `
-			#vn-ai-chat-root {
-				position: fixed;
-				right: 20px;
-				bottom: 20px;
-				z-index: 1050;
-				font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-			}
-
-			.vn-ai-chat-toggle {
-				width: 52px;
-				height: 52px;
-				border: 0;
-				border-radius: 50%;
-				background: #14532d;
-				color: #fff;
-				box-shadow: 0 12px 32px rgba(15, 23, 42, 0.22);
-				font-weight: 700;
-				cursor: pointer;
-			}
-
-			.vn-ai-chat-panel {
-				position: absolute;
-				right: 0;
-				bottom: 64px;
-				width: min(380px, calc(100vw - 32px));
-				height: min(560px, calc(100vh - 120px));
-				background: #fff;
-				border: 1px solid #d9e2dc;
-				border-radius: 8px;
-				box-shadow: 0 18px 48px rgba(15, 23, 42, 0.22);
-				overflow: hidden;
-				display: flex;
-				flex-direction: column;
-			}
-
-			.vn-ai-chat-panel[hidden] {
-				display: none;
-			}
-
-			.vn-ai-chat-header {
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
-				padding: 12px 14px;
-				border-bottom: 1px solid #e5e7eb;
-				background: #f8fafc;
-			}
-
-			.vn-ai-chat-header strong,
-			.vn-ai-chat-header span {
-				display: block;
-			}
-
-			.vn-ai-chat-header span {
-				color: #64748b;
-				font-size: 12px;
-				margin-top: 2px;
-			}
-
-			.vn-ai-chat-close {
-				width: 28px;
-				height: 28px;
-				border: 0;
-				background: transparent;
-				color: #475569;
-				font-size: 22px;
-				line-height: 1;
-				cursor: pointer;
-			}
-
-			.vn-ai-chat-messages {
-				flex: 1;
-				overflow-y: auto;
-				padding: 14px;
-				background: #f8fafc;
-			}
-
-			.vn-ai-message {
-				width: fit-content;
-				max-width: 88%;
-				white-space: pre-wrap;
-				overflow-wrap: anywhere;
-				border-radius: 8px;
-				padding: 9px 11px;
-				margin-bottom: 10px;
-				line-height: 1.45;
-				font-size: 13px;
-			}
-
-			.vn-ai-message-user {
-				margin-left: auto;
-				background: #166534;
-				color: #fff;
-			}
-
-			.vn-ai-message-assistant {
-				margin-right: auto;
-				background: #fff;
-				color: #0f172a;
-				border: 1px solid #e5e7eb;
-			}
-
-			.vn-ai-message-loading {
-				display: flex;
-				align-items: center;
-				gap: 5px;
-				color: #64748b;
-			}
-
-			.vn-ai-loading-dot {
-				width: 6px;
-				height: 6px;
-				border-radius: 50%;
-				background: #94a3b8;
-				animation: vn-ai-loading-pulse 1.2s ease-in-out infinite;
-			}
-
-			.vn-ai-loading-dot:nth-child(2) {
-				animation-delay: 0.15s;
-			}
-
-			.vn-ai-loading-dot:nth-child(3) {
-				animation-delay: 0.3s;
-			}
-
-			.vn-ai-loading-text {
-				margin-left: 4px;
-				font-size: 12px;
-			}
-
-			@keyframes vn-ai-loading-pulse {
-				0%, 80%, 100% {
-					opacity: 0.35;
-					transform: translateY(0);
-				}
-				40% {
-					opacity: 1;
-					transform: translateY(-3px);
-				}
-			}
-
-			.vn-ai-chat-form {
-				display: flex;
-				gap: 8px;
-				padding: 10px;
-				border-top: 1px solid #e5e7eb;
-				background: #fff;
-			}
-
-			.vn-ai-chat-input {
-				flex: 1;
-				min-height: 40px;
-				max-height: 96px;
-				resize: vertical;
-				border: 1px solid #cbd5e1;
-				border-radius: 8px;
-				padding: 8px 10px;
-				font-size: 13px;
-				line-height: 1.35;
-			}
-
-			.vn-ai-chat-send {
-				width: 56px;
-				height: 40px;
-				border: 0;
-				border-radius: 8px;
-				background: #14532d;
-				color: #fff;
-				font-weight: 600;
-				cursor: pointer;
-			}
-
-			.vn-ai-chat-send:disabled {
-				opacity: 0.65;
-				cursor: wait;
-			}
-		`;
-		document.head.appendChild(style);
 	}
 
 	if (document.readyState === "loading") {
