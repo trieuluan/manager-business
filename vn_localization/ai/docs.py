@@ -8,7 +8,7 @@ import frappe
 
 
 DOCS_DIR = Path(__file__).resolve().parent / "docs"
-MAX_CONTEXT_CHARS = 6000
+MAX_CONTEXT_CHARS = 3000
 
 
 def get_relevant_context(question):
@@ -22,7 +22,7 @@ def get_relevant_context(question):
 			docs.append((score, path.stem, content))
 
 	if not docs:
-		return _fallback_context()
+		return ""
 
 	docs.sort(key=lambda item: item[0], reverse=True)
 	context_parts = []
@@ -49,12 +49,4 @@ def _score_doc(question, content):
 
 def _tokens(text):
 	return [token.strip(".,:;!?()[]{}\"'") for token in text.split() if len(token.strip()) >= 3]
-
-
-def _fallback_context():
-	try:
-		return (DOCS_DIR / "general.md").read_text(encoding="utf-8")
-	except FileNotFoundError:
-		frappe.log_error("Missing AI assistant fallback docs", "vn_localization AI")
-		return ""
 

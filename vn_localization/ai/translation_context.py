@@ -38,10 +38,6 @@ def get_translation_context(question, menu_context=None):
 	translations = get_translations()
 	keys = _find_relevant_keys(question, translations)
 
-	for key in ALWAYS_INCLUDE:
-		if key in translations:
-			keys.add(key)
-
 	for key in _extract_english_terms(menu_context):
 		if key in translations:
 			keys.add(key)

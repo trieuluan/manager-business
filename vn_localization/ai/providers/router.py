@@ -2,12 +2,18 @@
 
 from __future__ import annotations
 
+import time
+
 import frappe
 
 from vn_localization.ai.providers.errors import ProviderError
 from vn_localization.ai.providers.ollama import OllamaProvider
 from vn_localization.ai.providers.openai_compatible import OpenAICompatibleProvider
-from vn_localization.ai.settings import get_ai_settings, get_provider_order
+from vn_localization.ai.settings import get_ai_settings, get_ollama_options, get_provider_order
+
+
+MAX_RETRIES = 2
+MAX_RETRY_WAIT = 10
 
 
 def chat(messages, options=None):
@@ -16,15 +22,18 @@ def chat(messages, options=None):
 		if not provider.is_available():
 			continue
 
-		try:
-			response = provider.chat(messages, options=options)
-			_log_provider(provider.name)
-			return response
-		except ProviderError as exc:
-			errors.append(f"{provider.name}: {exc}")
-			_log_provider_error(provider.name, exc)
-			if not exc.retryable:
-				continue
+		provider_options = _resolve_options(provider, options)
+		for attempt in range(MAX_RETRIES):
+			try:
+				response = provider.chat(messages, options=provider_options)
+				_log_provider(provider.name)
+				return response
+			except ProviderError as exc:
+				_log_provider_error(provider.name, exc)
+				if not exc.retryable or attempt == MAX_RETRIES - 1:
+					errors.append(f"{provider.name}: {exc}")
+					break
+				time.sleep(min(exc.retry_after or 2, MAX_RETRY_WAIT))
 
 	raise ProviderError("All AI providers failed: " + " | ".join(errors), retryable=False)
 
@@ -35,22 +44,32 @@ def stream_chat(messages, options=None):
 		if not provider.is_available():
 			continue
 
-		yielded_token = False
-		try:
-			for chunk in provider.stream_chat(messages, options=options):
-				if chunk.get("type") == "token":
-					yielded_token = True
-				yield chunk
-			_log_provider(provider.name)
-			return
-		except ProviderError as exc:
-			_log_provider_error(provider.name, exc)
-			if yielded_token:
-				raise
-			errors.append(f"{provider.name}: {exc}")
-			continue
+		provider_options = _resolve_options(provider, options)
+		for attempt in range(MAX_RETRIES):
+			yielded_token = False
+			try:
+				for chunk in provider.stream_chat(messages, options=provider_options):
+					if chunk.get("type") == "token":
+						yielded_token = True
+					yield chunk
+				_log_provider(provider.name)
+				return
+			except ProviderError as exc:
+				_log_provider_error(provider.name, exc)
+				if yielded_token:
+					raise
+				if not exc.retryable or attempt == MAX_RETRIES - 1:
+					errors.append(f"{provider.name}: {exc}")
+					break
+				time.sleep(min(exc.retry_after or 2, MAX_RETRY_WAIT))
 
 	raise ProviderError("All AI providers failed before streaming: " + " | ".join(errors), retryable=False)
+
+
+def _resolve_options(provider, options):
+	if isinstance(provider, OllamaProvider):
+		return options or get_ollama_options()
+	return None
 
 
 def _get_ordered_providers():

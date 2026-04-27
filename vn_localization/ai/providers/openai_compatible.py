@@ -120,6 +120,12 @@ class OpenAICompatibleProvider:
 
 	def _http_error(self, exc):
 		retryable = exc.code in {402, 408, 409, 429, 500, 502, 503, 504}
+		retry_after = None
+		if exc.code == 429:
+			try:
+				retry_after = int(exc.headers.get("Retry-After") or 0) or 2
+			except Exception:
+				retry_after = 2
 		detail = ""
 		try:
 			detail = exc.read().decode("utf-8")[:500]
@@ -128,5 +134,5 @@ class OpenAICompatibleProvider:
 		message = f"{self.name} returned HTTP {exc.code}"
 		if detail:
 			message = f"{message}: {detail}"
-		return ProviderError(message, retryable=retryable)
+		return ProviderError(message, retryable=retryable, retry_after=retry_after)
 

@@ -163,7 +163,7 @@ def get_menu_context(question):
 	menu_entries = _build_menu_entries(items)
 	matches = _find_matches(question, menu_entries)
 	if not matches:
-		return _compact_menu_overview(menu_entries)
+		return ""
 
 	lines = [
 		"Menu bên trái đã Việt hóa:",

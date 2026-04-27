@@ -14,24 +14,13 @@ from vn_localization.ai.menu_context import get_menu_context
 from vn_localization.ai.providers.errors import ProviderError
 from vn_localization.ai.providers.router import chat as provider_chat
 from vn_localization.ai.providers.router import stream_chat as provider_stream_chat
-from vn_localization.ai.settings import get_ollama_options
+from vn_localization.ai.settings import get_ollama_options, get_ai_settings
 from vn_localization.ai.translation_context import get_translation_context
 
 
 SYSTEM_PROMPT = """
-Bạn là trợ lý ERPNext cho người dùng Việt Nam.
-Trả lời đúng trọng tâm câu hỏi, ưu tiên câu trả lời ngắn và có thể làm ngay.
-
-Quy tắc bắt buộc:
-- Không mở rộng sang chủ đề khác nếu người dùng không hỏi.
-- Không giải thích lý thuyết dài dòng.
-- Nếu là câu hỏi thao tác, trả lời tối đa 5 bước.
-- Nếu là câu hỏi khái niệm, trả lời tối đa 5 câu.
-- Nếu thiếu dữ liệu hoặc không chắc cấu hình hệ thống, nói rõ cần kiểm tra lại.
-- Không bịa số liệu kinh doanh, khách hàng, hóa đơn, tồn kho hoặc dữ liệu nội bộ.
-- Nếu câu trả lời có thể ngắn trong 1-2 câu, hãy trả lời ngắn như vậy.
-- Khi câu hỏi hỏi "ở đâu", "menu nào", "mở chỗ nào", phải chỉ đường theo "menu bên trái" đã Việt hóa.
-- Ưu tiên dùng thuật ngữ tiếng Việt đã được cung cấp; chỉ ghi tên kỹ thuật tiếng Anh khi người dùng hỏi rõ.
+Trợ lý ERPNext tiếng Việt. Trả lời ngắn, đúng trọng tâm, tối đa 5 bước/câu.
+Không bịa số liệu. Dùng thuật ngữ tiếng Việt được cung cấp. Chỉ menu bên trái khi hỏi "ở đâu".
 """.strip()
 
 
@@ -55,10 +44,7 @@ def send_message(message, history=None, route=None, doctype=None, docname=None):
 	)
 
 	try:
-		response = provider_chat(
-			messages,
-			options=get_ollama_options(),
-		)
+		response = provider_chat(messages)
 	except ProviderError as exc:
 		frappe.log_error(frappe.get_traceback(), "vn_localization AI chat failed")
 		frappe.throw(str(exc), title="AI Assistant")
@@ -121,58 +107,22 @@ def _build_messages(
 	data_context=None,
 	history=None,
 ):
-	messages = [
-		{"role": "system", "content": SYSTEM_PROMPT},
-		{
-			"role": "system",
-			"content": f"Ngữ cảnh hướng dẫn nội bộ:\n{docs_context or 'Chưa có tài liệu phù hợp.'}",
-		},
-	]
+	messages = [{"role": "system", "content": SYSTEM_PROMPT}]
+
+	context_blocks = []
+	if docs_context:
+		context_blocks.append(f"[Tài liệu]\n{docs_context}")
 	if erp_context:
-		messages.append(
-			{
-				"role": "system",
-				"content": (
-					"Dữ liệu ERPNext hiện tại người dùng đang xem. "
-					"Chỉ dùng dữ liệu này nếu nó liên quan trực tiếp tới câu hỏi; "
-					"không suy diễn thêm ngoài dữ liệu được cung cấp.\n"
-					f"{erp_context}"
-				),
-			}
-		)
+		context_blocks.append(f"[Chứng từ hiện tại]\n{erp_context}")
 	if menu_context:
-		messages.append(
-			{
-				"role": "system",
-				"content": (
-					"Ngữ cảnh menu/sidebar hiện hành của hệ thống. "
-					"Nếu người dùng hỏi mở chức năng ở đâu, hãy trả lời bằng cụm \"menu bên trái: <nhóm> > <mục>\". "
-					"Không dùng cụm từ kỹ thuật \"Workspace Sidebar\" trong câu trả lời cho người dùng.\n"
-					f"{menu_context}"
-				),
-			}
-		)
+		context_blocks.append(f"[Menu]\n{menu_context}")
 	if translation_context:
-		messages.append(
-			{
-				"role": "system",
-				"content": (
-					"Ngữ cảnh dịch giao diện. Khi trả lời người dùng cuối, ưu tiên dùng vế tiếng Việt bên phải.\n"
-					f"{translation_context}"
-				),
-			}
-		)
+		context_blocks.append(f"[Thuật ngữ]\n{translation_context}")
 	if data_context:
-		messages.append(
-			{
-				"role": "system",
-				"content": (
-					"Dữ liệu ERPNext đã được backend kiểm quyền và trích xuất an toàn. "
-					"Chỉ dùng dữ liệu này nếu liên quan trực tiếp tới câu hỏi; không bịa thêm số liệu.\n"
-					f"{data_context}"
-				),
-			}
-		)
+		context_blocks.append(f"[Dữ liệu kho]\n{data_context}")
+
+	if context_blocks:
+		messages.append({"role": "system", "content": "\n\n".join(context_blocks)})
 
 	for item in _safe_history(history):
 		messages.append(item)
@@ -186,10 +136,7 @@ def _stream_events(messages):
 	yield (": " + (" " * 2048) + "\n\n").encode("utf-8")
 
 	try:
-		for chunk in provider_stream_chat(
-			messages,
-			options=get_ollama_options(),
-		):
+		for chunk in provider_stream_chat(messages):
 			if chunk["type"] == "token":
 				yield _sse("token", {"content": chunk["content"], "model": chunk["model"]})
 			elif chunk["type"] == "done":
@@ -234,10 +181,10 @@ def _safe_history(history):
 		history = frappe.parse_json(history)
 
 	safe_items = []
-	for item in history[-6:]:
+	for item in history[-4:]:
 		role = item.get("role")
 		content = (item.get("content") or "").strip()
 		if role not in {"user", "assistant"} or not content:
 			continue
-		safe_items.append({"role": role, "content": content[:1500]})
+		safe_items.append({"role": role, "content": content[:600]})
 	return safe_items
