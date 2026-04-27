@@ -8,7 +8,7 @@
 	const STREAM_METHOD = "vn_localization.ai.chat.stream_message";
 	const STORAGE_KEY = "vn_localization_ai_chat_history";
 	const MAX_HISTORY_ITEMS = 12;
-	const WIDGET_VERSION = "20260428-current-doc";
+	const WIDGET_VERSION = "20260428-translations";
 
 	console.info("VN AI chat widget loaded", WIDGET_VERSION);
 
@@ -149,7 +149,7 @@
 
 				if (event.event === "token" && event.data.content) {
 					assistantContent += event.data.content;
-					updateStreamingMessage(assistantMessage, assistantContent);
+					updateStreamingMessage(assistantMessage, sanitizeAssistantText(assistantContent));
 				}
 
 				if (event.event === "error") {
@@ -162,7 +162,7 @@
 			throw new Error("AI stream returned no content");
 		}
 
-		history.push({ role: "assistant", content: assistantContent.trim() });
+		history.push({ role: "assistant", content: sanitizeAssistantText(assistantContent).trim() });
 		trimHistory(history);
 		saveHistory(history);
 		renderMessages(messagesEl, history);
@@ -185,7 +185,7 @@
 					const data = response.message || {};
 					history.push({
 						role: "assistant",
-						content: data.message || "Mình chưa nhận được phản hồi phù hợp.",
+						content: sanitizeAssistantText(data.message || "Mình chưa nhận được phản hồi phù hợp."),
 					});
 					trimHistory(history);
 					saveHistory(history);
@@ -282,6 +282,28 @@
 		message.classList.remove("vn-ai-message-loading");
 		message.textContent = content;
 		scrollToBottom(message.parentElement);
+	}
+
+	function sanitizeAssistantText(text) {
+		const replacements = {
+			"menu\\s+Workspace\\s+Sidebar": "menu bên trái",
+			"Workspace\\s+Sidebar": "menu bên trái",
+			"Purchase\\s+Receipt": "Phiếu nhập kho",
+			"Sales\\s+Invoice": "Hóa đơn bán hàng",
+			"Purchase\\s+Invoice": "Hóa đơn mua hàng",
+			"Stock\\s+Entry": "Phiếu nhập xuất kho",
+			"Stock\\s+Reconciliation": "Kiểm kê kho",
+			"Journal\\s+Entry": "Bút toán",
+			"Payment\\s+Entry": "Phiếu thu chi",
+			"Delivery\\s+Note": "Phiếu giao hàng",
+			"Sales\\s+Order": "Đơn bán hàng",
+			"Purchase\\s+Order": "Đơn đặt hàng",
+		};
+		let value = String(text || "");
+		Object.keys(replacements).forEach(function (source) {
+			value = value.replace(new RegExp(source, "gi"), replacements[source]);
+		});
+		return value;
 	}
 
 	function renderMessages(container, history, isWaiting) {
