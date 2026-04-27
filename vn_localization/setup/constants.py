@@ -47,6 +47,7 @@ VN_SME_ACCOUNTS = {
     ],
 }
 
+
 VN_PRINT_FORMATS = [
     {
         "name": "VN Sales Invoice",

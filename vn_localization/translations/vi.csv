@@ -16,9 +16,51 @@ Items,Danh sách hàng hóa
 Item Code,Mã hàng
 Item Name,Tên hàng
 Item Group,Nhóm hàng
-Stock UOM,Đơn vị tính
-UOM,Đơn vị
+Item Group Name,Tên nhóm hàng
+Parent Item Group,Nhóm hàng cha
+Stock UOM,Đơn vị tính tồn kho
+Sales UOM,Đơn vị tính bán hàng
+Purchase UOM,Đơn vị tính mua hàng
+UOM,Đơn vị tính
+UOM Conversion Factor,Hệ số quy đổi đơn vị
+Default UOM,Đơn vị tính mặc định
 Description,Mô tả
+Item Image,Hình ảnh hàng hóa
+Brand,Thương hiệu
+Barcodes,Mã vạch
+Barcode,Mã vạch
+Has Variants,Có biến thể
+Variant Of,Biến thể của
+Variants,Biến thể
+Has Serial No,Có số serial
+Has Batch No,Có số lô
+Is Stock Item,Là hàng tồn kho
+Is Fixed Asset,Là tài sản cố định
+Is Purchase Item,Được phép mua
+Is Sales Item,Được phép bán
+Is Sub Contracted Item,Hàng gia công
+Include Item In Manufacturing,Dùng trong sản xuất
+Valuation Method,Phương pháp tính giá
+Standard Selling Rate,Giá bán tiêu chuẩn
+Last Purchase Rate,Giá mua lần cuối
+Valuation Rate,Giá trị tồn kho
+Opening Stock,Tồn kho ban đầu
+Safety Stock,Tồn kho an toàn
+Reorder Level,Mức tồn kho cần đặt lại
+Reorder Qty,Số lượng đặt lại
+Lead Time in Days,Thời gian giao hàng (ngày)
+Warranty Period (in days),Thời gian bảo hành (ngày)
+Country of Origin,Xuất xứ
+Default Warehouse,Kho mặc định
+Default Supplier,Nhà cung cấp mặc định
+Customer Items,Mã hàng theo khách hàng
+Supplier Items,Mã hàng theo nhà cung cấp
+Item Tax,Thuế hàng hóa
+Item Defaults,Mặc định hàng hóa
+Purchasing,Mua hàng
+Sales Details,Chi tiết bán hàng
+Over Delivery/Receipt Allowance (%),Cho phép giao/nhận vượt (%)
+Over Billing Allowance (%),Cho phép xuất hóa đơn vượt (%)
 
 Warehouse,Kho
 Warehouses,Danh sách kho
@@ -144,3 +186,114 @@ Show Return Entries,Hiển thị các chứng từ trả hàng
 Update Outstanding for Self,Cập nhật số dư còn lại cho chính chứng từ
 Price List,Bảng giá
 Material Request,Yêu cầu mua
+
+Consumable,Công cụ dụng cụ
+Products,Hàng hóa
+Raw Material,Nguyên vật liệu
+Services,Dịch vụ
+Sub Assemblies,Thành phẩm
+All Item Groups,Tất cả nhóm hàng
+
+Nos,Cái
+Box,Hộp
+Kg,Kg
+Gram,Gram
+Meter,Mét
+Liter,Lít
+Pair,Đôi
+Set,Bộ
+Dozen,Chục
+Hour,Giờ
+Day,Ngày
+Month,Tháng
+Unit,Đơn vị
+Piece,Miếng
+Roll,Cuộn
+Sheet,Tờ
+Bag,Túi
+Bottle,Chai
+Can,Lon
+Pack,Gói
+Carton,Thùng
+Tube,Ống
+Tonne,Tấn
+
+Territory,Khu vực
+All Territories,Tất cả khu vực
+
+Currency,Tiền tệ
+Exchange Rate,Tỷ giá
+
+Mode of Payment,Phương thức thanh toán
+Payment Account,Tài khoản thanh toán
+
+Cost Center,Trung tâm chi phí
+Default Cost Center,Trung tâm chi phí mặc định
+
+Quotation,Báo giá
+Quotations,Danh sách báo giá
+Quotation To,Báo giá cho
+Valid Till,Hiệu lực đến ngày
+Sales Order,Đơn bán hàng
+Sales Orders,Danh sách đơn bán hàng
+Delivery Date,Ngày giao hàng
+Per Delivered,Đã giao (%)
+Per Billed,Đã xuất hóa đơn (%)
+Advance Paid,Đã đặt cọc
+
+Purchase Order,Đơn đặt hàng
+Purchase Orders,Danh sách đơn đặt hàng
+Supplier Quotation,Báo giá từ nhà cung cấp
+Request for Quotation,Yêu cầu báo giá
+Expected Delivery Date,Ngày giao hàng dự kiến
+Per Received,Đã nhận (%)
+
+Stock Entry,Phiếu xuất nhập kho
+Stock Entry Type,Loại phiếu kho
+Material Receipt,Nhập kho
+Material Issue,Xuất kho
+Material Transfer,Chuyển kho
+Material Transfer for Manufacture,Chuyển kho sản xuất
+Manufacture,Sản xuất
+Repack,Đóng gói lại
+Send to Subcontractor,Gửi gia công
+
+Batch No,Số lô
+Serial No,Số serial
+Expiry Date,Ngày hết hạn
+Manufacturing Date,Ngày sản xuất
+
+Discount (%),Chiết khấu (%)
+Discount Amount,Số tiền chiết khấu
+Additional Discount (%),Chiết khấu bổ sung (%)
+Apply Discount On,Áp dụng chiết khấu trên
+
+Tax Category,Danh mục thuế
+Taxes and Charges,Thuế và phí
+Tax Rate,Thuế suất
+Tax Amount,Tiền thuế
+Total Taxes and Charges,Tổng thuế và phí
+
+Terms and Conditions,Điều khoản và điều kiện
+Shipping Address,Địa chỉ giao hàng
+Billing Address,Địa chỉ xuất hóa đơn
+
+Draft,Nháp
+Submitted,Đã xác nhận
+Cancelled,Đã hủy
+Closed,Đã đóng
+To Deliver,Chờ giao hàng
+To Bill,Chờ xuất hóa đơn
+To Receive,Chờ nhận hàng
+To Receive and Bill,Chờ nhận hàng và xuất hóa đơn
+Completed,Hoàn thành
+
+Print Format,Mẫu in
+Letter Head,Tiêu đề thư
+Print Language,Ngôn ngữ in
+
+Set Posting Time,Đặt thời gian hạch toán
+Edit Posting Date and Time,Chỉnh ngày giờ hạch toán
+Is Return,Là phiếu trả hàng
+Return Against,Trả hàng cho chứng từ
+Amended From,Điều chỉnh từ chứng từ
