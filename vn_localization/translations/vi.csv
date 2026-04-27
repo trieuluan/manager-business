@@ -15,9 +15,9 @@ Item,Hàng hóa
 Items,Danh sách hàng hóa
 Item Code,Mã hàng
 Item Name,Tên hàng
-Item Group,Nhóm hàng
-Item Group Name,Tên nhóm hàng
-Parent Item Group,Nhóm hàng cha
+Item Group,Nhóm hàng hóa
+Item Group Name,Tên nhóm hàng hóa
+Parent Item Group,Nhóm hàng hóa cha
 Stock UOM,Đơn vị tính tồn kho
 Sales UOM,Đơn vị tính bán hàng
 Purchase UOM,Đơn vị tính mua hàng
@@ -192,7 +192,7 @@ Products,Hàng hóa
 Raw Material,Nguyên vật liệu
 Services,Dịch vụ
 Sub Assemblies,Thành phẩm
-All Item Groups,Tất cả nhóm hàng
+All Item Groups,Tất cả nhóm hàng hóa
 
 Nos,Cái
 Box,Hộp

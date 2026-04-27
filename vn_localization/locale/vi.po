@@ -37948,7 +37948,7 @@ msgstr ""
 #: erpnext/setup/setup_wizard/operations/install_fixtures.py:60
 #: erpnext/setup/setup_wizard/operations/install_fixtures.py:66
 msgid "All Item Groups"
-msgstr "Tất cả nhóm mặt hàng"
+msgstr "Tất cả nhóm hàng hóa"
 
 #: erpnext/selling/page/point_of_sale/pos_item_selector.js:25
 msgid "All Items"
@@ -39010,7 +39010,7 @@ msgstr ""
 #. Description of a DocType
 #: erpnext/setup/doctype/item_group/item_group.json
 msgid "An Item Group is a way to classify items based on types."
-msgstr "Nhóm mặt hàng là cách phân loại các mặt hàng theo từng loại."
+msgstr "Nhóm hàng hóa là cách phân loại các hàng hóa theo từng loại."
 
 #: erpnext/stock/doctype/repost_item_valuation/repost_item_valuation.py:520
 msgid "An error has been appeared while reposting item valuation via {0}"
@@ -39082,7 +39082,7 @@ msgstr ""
 
 #: erpnext/stock/report/fifo_queue_vs_qty_after_transaction_comparison/fifo_queue_vs_qty_after_transaction_comparison.py:37
 msgid "Any one of following filters required: warehouse, Item Code, Item Group"
-msgstr "Cần ít nhất một trong các bộ lọc sau: kho, mã mặt hàng, nhóm mặt hàng"
+msgstr "Cần ít nhất một trong các bộ lọc sau: kho, mã hàng, nhóm hàng hóa"
 
 #: erpnext/setup/setup_wizard/data/industry_type.txt:6
 msgid "Apparel & Accessories"
@@ -39312,7 +39312,7 @@ msgstr "Áp dụng quy tắc theo mã mặt hàng"
 #. Label of the item_groups (Table) field in DocType 'Pricing Rule'
 #: erpnext/accounts/doctype/pricing_rule/pricing_rule.json
 msgid "Apply Rule On Item Group"
-msgstr "Áp dụng quy tắc theo nhóm mặt hàng"
+msgstr "Áp dụng quy tắc theo nhóm hàng hóa"
 
 #. Label of the apply_rule_on_other (Select) field in DocType 'Pricing Rule'
 #. Label of the apply_rule_on_other (Select) field in DocType 'Promotional
@@ -42770,7 +42770,7 @@ msgstr ""
 #. Name of a report
 #: erpnext/stock/report/cogs_by_item_group/cogs_by_item_group.json
 msgid "COGS By Item Group"
-msgstr "Giá vốn theo nhóm mặt hàng"
+msgstr "Giá vốn theo nhóm hàng hóa"
 
 #: erpnext/stock/report/cogs_by_item_group/cogs_by_item_group.py:44
 msgid "COGS Debit"
@@ -47457,7 +47457,7 @@ msgstr ""
 #. Rule'
 #: erpnext/setup/doctype/authorization_rule/authorization_rule.json
 msgid "Customer / Item / Item Group"
-msgstr "Khách hàng / Mặt hàng / Nhóm mặt hàng"
+msgstr "Khách hàng / Hàng hóa / Nhóm hàng hóa"
 
 #. Label of the customer_address (Link) field in DocType 'Opportunity'
 #: erpnext/crm/doctype/opportunity/opportunity.json
@@ -48656,7 +48656,7 @@ msgstr ""
 #. Label of the item_group (Link) field in DocType 'Stock Settings'
 #: erpnext/stock/doctype/stock_settings/stock_settings.json
 msgid "Default Item Group"
-msgstr "Nhóm mặt hàng mặc định"
+msgstr "Nhóm hàng hóa mặc định"
 
 #. Label of the default_item_manufacturer (Link) field in DocType 'Item'
 #: erpnext/stock/doctype/item/item.json
@@ -50767,7 +50767,7 @@ msgstr ""
 
 #: erpnext/accounts/doctype/pos_profile/pos_profile.py:164
 msgid "Duplicate Item Group"
-msgstr "Trùng nhóm mặt hàng"
+msgstr "Trùng nhóm hàng hóa"
 
 #: erpnext/manufacturing/doctype/workstation/workstation.py:79
 #: erpnext/manufacturing/doctype/workstation_type/workstation_type.py:37
@@ -50809,7 +50809,7 @@ msgstr "Bị trùng bản ghi theo mã mặt hàng {0} và nhà sản xuất {1}
 
 #: erpnext/accounts/doctype/pos_profile/pos_profile.py:164
 msgid "Duplicate item group found in the item group table"
-msgstr "Phát hiện nhóm mặt hàng bị trùng trong bảng nhóm mặt hàng"
+msgstr "Phát hiện nhóm hàng hóa bị trùng trong bảng nhóm hàng hóa"
 
 #: erpnext/projects/doctype/project/project.js:186
 msgid "Duplicate project has been created"
@@ -53143,7 +53143,7 @@ msgstr ""
 
 #: erpnext/selling/page/point_of_sale/pos_item_selector.js:334
 msgid "Focus on Item Group filter"
-msgstr "Tập trung vào bộ lọc Nhóm mặt hàng"
+msgstr "Tập trung vào bộ lọc Nhóm hàng hóa"
 
 #: erpnext/selling/page/point_of_sale/pos_item_selector.js:325
 msgid "Focus on search input"
@@ -58764,30 +58764,30 @@ msgstr ""
 #: erpnext/stock/report/warehouse_wise_item_balance_age_and_value/warehouse_wise_item_balance_age_and_value.py:99
 #: erpnext/stock/workspace/stock/stock.json
 msgid "Item Group"
-msgstr "Nhóm mặt hàng"
+msgstr "Nhóm hàng hóa"
 
 #. Label of the item_group_defaults (Table) field in DocType 'Item Group'
 #: erpnext/setup/doctype/item_group/item_group.json
 msgid "Item Group Defaults"
-msgstr "Giá trị mặc định của nhóm mặt hàng"
+msgstr "Giá trị mặc định của nhóm hàng hóa"
 
 #. Label of the item_group_name (Data) field in DocType 'Item Group'
 #: erpnext/setup/doctype/item_group/item_group.json
 msgid "Item Group Name"
-msgstr "Tên nhóm mặt hàng"
+msgstr "Tên nhóm hàng hóa"
 
 #: erpnext/setup/doctype/item_group/item_group.js:82
 msgid "Item Group Tree"
-msgstr "Cây nhóm mặt hàng"
+msgstr "Cây nhóm hàng hóa"
 
 #: erpnext/accounts/doctype/pricing_rule/pricing_rule.py:526
 msgid "Item Group not mentioned in item master for item {0}"
-msgstr "Chưa khai báo Nhóm mặt hàng trong danh mục mặt hàng cho mặt hàng {0}"
+msgstr "Chưa khai báo Nhóm hàng hóa cho hàng hóa {0}"
 
 #. Option for the 'Based On' (Select) field in DocType 'Authorization Rule'
 #: erpnext/setup/doctype/authorization_rule/authorization_rule.json
 msgid "Item Group wise Discount"
-msgstr "Chiết khấu theo nhóm mặt hàng"
+msgstr "Chiết khấu theo nhóm hàng hóa"
 
 #. Label of the item_groups (Table) field in DocType 'POS Profile'
 #: erpnext/accounts/doctype/pos_profile/pos_profile.json
@@ -81880,7 +81880,7 @@ msgstr "Giá trị tồn kho"
 #. Label of a chart in the Stock Workspace
 #: erpnext/stock/workspace/stock/stock.json
 msgid "Stock Value by Item Group"
-msgstr "Giá trị tồn kho theo nhóm mặt hàng"
+msgstr "Giá trị tồn kho theo nhóm hàng hóa"
 
 #. Name of a report
 #: erpnext/stock/report/stock_and_account_value_comparison/stock_and_account_value_comparison.json
