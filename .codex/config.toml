@@ -1,0 +1,13 @@
+# Project-local Codex config for vn_localization.
+#
+# CodeMap project resolution lives in .codemap/mcp.json.
+# Keep this file for Codex-local project metadata only.
+
+[project]
+name = "vn_localization"
+root = "/Users/louis/Development/frappe_docker/development/frappe-bench/apps/vn_localization"
+repository = "https://github.com/trieuluan/manager-business.git"
+branch = "main"
+
+[projects."/Users/louis/Development/frappe_docker/development/frappe-bench/apps/vn_localization"]
+trust_level = "trusted"
