@@ -4152,7 +4152,7 @@ msgstr "Xuất PDF hàng loạt"
 #. Name of a DocType
 #: frappe/desk/doctype/bulk_update/bulk_update.json
 msgid "Bulk Update"
-msgstr "Cập nhật hàng loạt"
+msgstr "Chỉnh sửa hàng loạt"
 
 #: frappe/model/workflow.py:310
 msgid "Bulk approval only support up to 500 documents."
@@ -5974,8 +5974,7 @@ msgstr "Liên hệ"
 
 #: frappe/integrations/doctype/google_calendar/google_calendar.py:812
 msgid "Contact / email not found. Did not add attendee for -<br>{0}"
-msgstr ""
-"Không tìm thấy liên hệ/email. Không thêm người tham dự cho -<br>"
+msgstr "Không tìm thấy liên hệ/email. Không thêm người tham dự cho -<br>{0}"
 
 #. Label of the sb_01 (Section Break) field in DocType 'Contact'
 #: frappe/contacts/doctype/contact/contact.json
@@ -7609,7 +7608,7 @@ msgstr "Loại tài liệu đã xóa"
 #. Name of a DocType
 #: frappe/core/doctype/deleted_document/deleted_document.json
 msgid "Deleted Document"
-msgstr "Tài liệu đã xóa"
+msgstr "Thùng rác"
 
 #. Label of the deleted_name (Data) field in DocType 'Deleted Document'
 #: frappe/core/doctype/deleted_document/deleted_document.json
@@ -41159,7 +41158,7 @@ msgstr "Số sê-ri còn lại"
 #: erpnext/public/js/financial_statements.js:267
 #: erpnext/setup/doctype/email_digest/email_digest.json
 msgid "Balance Sheet"
-msgstr ""
+msgstr "Bảng cân đối kế toán"
 
 #. Label of the bs_closing_balance (JSON) field in DocType 'Process Period
 #. Closing Voucher'
@@ -41679,7 +41678,7 @@ msgstr "Đơn giá cơ bản (theo ĐVT tồn kho)"
 #: erpnext/stock/report/stock_qty_vs_batch_qty/stock_qty_vs_batch_qty.py:32
 #: erpnext/stock/workspace/stock/stock.json
 msgid "Batch"
-msgstr "Lô"
+msgstr "Lô hàng"
 
 #. Label of the description (Small Text) field in DocType 'Batch'
 #: erpnext/stock/doctype/batch/batch.json
@@ -42731,7 +42730,7 @@ msgstr ""
 #: erpnext/buying/workspace/buying/buying.json
 #: erpnext/setup/workspace/settings/settings.json
 msgid "Buying Settings"
-msgstr ""
+msgstr "Cài đặt mua hàng"
 
 #. Label of the buying_and_selling_tab (Tab Break) field in DocType 'Company'
 #: erpnext/setup/doctype/company/company.json
@@ -58277,7 +58276,7 @@ msgstr ""
 #: erpnext/templates/pages/material_request_info.html:42
 #: erpnext/templates/pages/order.html:94
 msgid "Item"
-msgstr ""
+msgstr "Hàng hóa"
 
 #: erpnext/stock/report/bom_search/bom_search.js:8
 msgid "Item 1"
@@ -59048,7 +59047,7 @@ msgstr ""
 #: erpnext/stock/doctype/item_price/item_price.json
 #: erpnext/stock/workspace/stock/stock.json
 msgid "Item Price"
-msgstr "Giá mặt hàng"
+msgstr "Bảng giá"
 
 #. Label of the item_price_settings_section (Section Break) field in DocType
 #. 'Accounts Settings'
@@ -59872,7 +59871,7 @@ msgstr ""
 #: erpnext/assets/doctype/depreciation_schedule/depreciation_schedule.json
 #: erpnext/templates/form_grid/bank_reconciliation_grid.html:3
 msgid "Journal Entry"
-msgstr "Bút toán nhật ký"
+msgstr "Bút toán"
 
 #. Name of a DocType
 #: erpnext/accounts/doctype/journal_entry_account/journal_entry_account.json
@@ -61928,7 +61927,7 @@ msgstr ""
 #: erpnext/subcontracting/doctype/subcontracting_order_item/subcontracting_order_item.json
 #: erpnext/subcontracting/doctype/subcontracting_order_service_item/subcontracting_order_service_item.json
 msgid "Material Request"
-msgstr "Yêu cầu nguyên vật liệu"
+msgstr "Yêu cầu mua"
 
 #. Label of the material_request_date (Date) field in DocType 'Production Plan
 #. Material Request'
@@ -62775,7 +62774,7 @@ msgstr ""
 #: erpnext/accounts/workspace/accounting/accounting.json
 #: erpnext/selling/page/point_of_sale/pos_controller.js:33
 msgid "Mode of Payment"
-msgstr ""
+msgstr "Phương thức thanh toán"
 
 #. Name of a DocType
 #: erpnext/accounts/doctype/mode_of_payment_account/mode_of_payment_account.json
@@ -67125,7 +67124,7 @@ msgstr ""
 #: erpnext/accounts/workspace/payables/payables.json
 #: erpnext/accounts/workspace/receivables/receivables.json
 msgid "Payment Entry"
-msgstr "Phiếu thanh toán"
+msgstr "Phiếu thu chi"
 
 #. Name of a DocType
 #: erpnext/accounts/doctype/payment_entry_deduction/payment_entry_deduction.json
@@ -67505,7 +67504,7 @@ msgstr ""
 #: erpnext/selling/doctype/quotation/quotation.json
 #: erpnext/selling/doctype/sales_order/sales_order.json
 msgid "Payment Terms Template"
-msgstr "Mẫu điều khoản thanh toán"
+msgstr "Điều kiện thanh toán"
 
 #. Name of a DocType
 #: erpnext/accounts/doctype/payment_terms_template_detail/payment_terms_template_detail.json
@@ -71538,7 +71537,7 @@ msgstr ""
 #: erpnext/subcontracting/doctype/subcontracting_receipt_item/subcontracting_receipt_item.json
 #: erpnext/subcontracting/workspace/subcontracting/subcontracting.json
 msgid "Purchase Order"
-msgstr ""
+msgstr "Đơn đặt hàng"
 
 #: erpnext/buying/report/procurement_tracker/procurement_tracker.py:103
 msgid "Purchase Order Amount"
@@ -71715,7 +71714,7 @@ msgstr ""
 #: erpnext/stock/workspace/stock/stock.json
 #: erpnext/subcontracting/doctype/subcontracting_receipt/subcontracting_receipt.js:67
 msgid "Purchase Receipt"
-msgstr ""
+msgstr "Phiếu nhập kho"
 
 #. Description of the 'Auto Create Purchase Receipt' (Check) field in DocType
 #. 'Buying Settings'
@@ -74693,7 +74692,7 @@ msgstr ""
 #: erpnext/buying/workspace/buying/buying.json
 #: erpnext/stock/doctype/material_request/material_request.js:190
 msgid "Request for Quotation"
-msgstr ""
+msgstr "Yêu cầu báo giá"
 
 #. Name of a DocType
 #. Label of the request_for_quotation_item (Data) field in DocType 'Supplier
@@ -77831,7 +77830,7 @@ msgstr ""
 #: erpnext/accounts/report/sales_register/sales_register.json
 #: erpnext/accounts/workspace/receivables/receivables.json
 msgid "Sales Register"
-msgstr ""
+msgstr "Sổ bán hàng"
 
 #: erpnext/setup/setup_wizard/data/designation.txt:28
 msgid "Sales Representative"
@@ -78774,7 +78773,7 @@ msgstr "Đơn giá bán"
 #: erpnext/setup/workspace/settings/settings.json
 #: erpnext/stock/doctype/stock_settings/stock_settings.py:221
 msgid "Selling Settings"
-msgstr "Thiết lập bán hàng"
+msgstr "Cài đặt bán hàng"
 
 #: erpnext/accounts/doctype/pricing_rule/pricing_rule.py:214
 msgid "Selling must be checked, if Applicable For is selected as {0}"
@@ -78980,7 +78979,7 @@ msgstr ""
 #: erpnext/support/doctype/warranty_claim/warranty_claim.json
 #: erpnext/support/workspace/support/support.json
 msgid "Serial No"
-msgstr "Số sê-ri"
+msgstr "Số serial"
 
 #: erpnext/stock/report/available_serial_no/available_serial_no.py:140
 msgid "Serial No (In/Out)"
@@ -81224,7 +81223,7 @@ msgstr "Tồn kho khả dụng"
 #: erpnext/stock/report/warehouse_wise_stock_balance/warehouse_wise_stock_balance.py:107
 #: erpnext/stock/workspace/stock/stock.json
 msgid "Stock Balance"
-msgstr "Số dư tồn kho"
+msgstr "Tồn kho hiện tại"
 
 #: erpnext/stock/doctype/quick_stock_balance/quick_stock_balance.js:15
 msgid "Stock Balance Report"
@@ -81299,7 +81298,7 @@ msgstr "Các Phiếu nhập xuất kho đã được tạo cho Lệnh sản xu�
 #: erpnext/stock/doctype/stock_reservation_entry/stock_reservation_entry.json
 #: erpnext/stock/workspace/stock/stock.json
 msgid "Stock Entry"
-msgstr "Phiếu nhập xuất kho"
+msgstr "Xuất nhập kho"
 
 #. Label of the outgoing_stock_entry (Link) field in DocType 'Stock Entry'
 #: erpnext/stock/doctype/stock_entry/stock_entry.json
@@ -81532,7 +81531,7 @@ msgstr ""
 #: erpnext/stock/doctype/stock_reconciliation/stock_reconciliation.json
 #: erpnext/stock/workspace/stock/stock.json
 msgid "Stock Reconciliation"
-msgstr "Đối chiếu tồn kho"
+msgstr "Kiểm kê kho"
 
 #. Name of a DocType
 #: erpnext/stock/doctype/stock_reconciliation_item/stock_reconciliation_item.json
@@ -81672,7 +81671,7 @@ msgstr "Số lượng tồn kho đã giữ trước (theo ĐVT tồn kho)"
 #: erpnext/stock/doctype/stock_settings/stock_settings.json
 #: erpnext/stock/workspace/stock/stock.json
 msgid "Stock Settings"
-msgstr "Thiết lập kho"
+msgstr "Cài đặt kho"
 
 #. Label of the stock_summary_tab (Tab Break) field in DocType 'Plant Floor'
 #. Label of the stock_summary (HTML) field in DocType 'Plant Floor'
@@ -82733,7 +82732,7 @@ msgstr ""
 #: erpnext/stock/report/serial_no_and_batch_traceability/serial_no_and_batch_traceability.py:520
 #: erpnext/stock/report/supplier_wise_sales_analytics/supplier_wise_sales_analytics.js:8
 msgid "Supplier"
-msgstr ""
+msgstr "Nhà cung cấp"
 
 #: erpnext/accounts/doctype/pricing_rule/pricing_rule.js:50
 msgid "Supplier > Supplier Type"
@@ -82826,7 +82825,7 @@ msgstr ""
 #: erpnext/regional/report/irs_1099/irs_1099.py:70
 #: erpnext/setup/doctype/supplier_group/supplier_group.json
 msgid "Supplier Group"
-msgstr ""
+msgstr "Nhóm nhà cung cấp"
 
 #. Name of a DocType
 #: erpnext/accounts/doctype/supplier_group_item/supplier_group_item.json
@@ -83006,7 +83005,7 @@ msgstr ""
 #: erpnext/selling/doctype/quotation/quotation.json
 #: erpnext/stock/doctype/material_request/material_request.js:196
 msgid "Supplier Quotation"
-msgstr ""
+msgstr "Báo giá từ NCC"
 
 #. Name of a report
 #. Label of a Link in the Buying Workspace
@@ -87198,7 +87197,7 @@ msgstr ""
 #: erpnext/templates/emails/reorder_item.html:11
 #: erpnext/templates/includes/rfq/rfq_items.html:17
 msgid "UOM"
-msgstr ""
+msgstr "Đơn vị tính"
 
 #. Name of a DocType
 #: erpnext/stock/doctype/uom_category/uom_category.json

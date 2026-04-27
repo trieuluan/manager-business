@@ -2,7 +2,10 @@
   "permissions": {
     "allow": [
       "mcp__codemap-mcp-dev__get_project_map",
-      "mcp__codemap-mcp-dev__get_project_insights"
+      "mcp__codemap-mcp-dev__get_project_insights",
+      "mcp__codemap-mcp-dev__trigger_reimport",
+      "mcp__codemap-mcp-dev__search_codebase",
+      "mcp__codemap-mcp-dev__wait_for_import"
     ]
   }
 }
