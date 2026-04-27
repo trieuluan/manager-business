@@ -269,11 +269,13 @@ fixtures = [
     },
     {
         "dt": "Workspace",
-        "filters": [["module", "=", "Vn Localization"]]
+        "filters": [["module", "=", "Vn Localization"]],
+        "force": True
     },
     {
         "dt": "Workspace Sidebar",
-        "filters": [["module", "=", "Vn Localization"]]
+        "filters": [["module", "=", "Vn Localization"]],
+        "force": True
     },
     {
         "dt": "Workflow",
