@@ -9,6 +9,7 @@ import frappe
 from vn_localization.ai.providers.errors import ProviderError
 from vn_localization.ai.providers.ollama import OllamaProvider
 from vn_localization.ai.providers.openai_compatible import OpenAICompatibleProvider
+from vn_localization.ai.providers.qwen_cloud import QwenCloudProvider
 from vn_localization.ai.settings import get_ai_settings, get_ollama_options, get_provider_order
 
 
@@ -110,6 +111,7 @@ def _provider_map():
 			timeout=settings["external_ai_timeout"],
 		),
 		"ollama": OllamaProvider(),
+		"qwen3.5:cloud": QwenCloudProvider(),
 	}
 
 

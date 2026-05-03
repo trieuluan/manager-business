@@ -13,7 +13,7 @@ DEFAULT_OLLAMA_MODEL = "qwen2.5:3b"
 DEFAULT_OLLAMA_TIMEOUT = 120
 DEFAULT_OLLAMA_NUM_PREDICT = 700
 DEFAULT_OLLAMA_TEMPERATURE = 0.2
-DEFAULT_PROVIDER_ORDER = ["openrouter", "groq", "openai", "ollama"]
+DEFAULT_PROVIDER_ORDER = ["openrouter", "groq", "openai", "qwen3.5:cloud", "ollama"]
 
 DEFAULT_OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
 DEFAULT_OPENROUTER_MODEL = "meta-llama/llama-3.3-70b-instruct:free"
